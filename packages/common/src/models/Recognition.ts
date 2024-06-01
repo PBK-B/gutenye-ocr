@@ -1,7 +1,7 @@
 import type { InferenceSession as InferenceSessionCommon, Tensor } from 'onnxruntime-common'
 import invariant from 'tiny-invariant'
 import { FileUtils, InferenceSession, defaultModels } from '#common/backend'
-import type { Dictionary, Line, LineImage, ModelBaseConstructorArg, ModelCreateOptions } from '#common/types'
+import type { Dictionary, Line, LineImage, ModelBaseConstructorArg, ModelCreateOptions, OcrRecognitionOptions } from '#common/types'
 import { ModelBase } from './ModelBase'
 
 export class Recognition extends ModelBase {
@@ -23,7 +23,7 @@ export class Recognition extends ModelBase {
     this.#dictionary = dictionary
   }
 
-  async run(lineImages: LineImage[], { onnxOptions = {} }: { onnxOptions?: InferenceSessionCommon.RunOptions } = {}) {
+  async run(lineImages: LineImage[], { onnxOptions = {}, isFormatByLine = true }: OcrRecognitionOptions = {}) {
     const modelDatas = await Promise.all(
       // Detect text from each line image
       lineImages.map(async (lineImage, index) => {
@@ -54,8 +54,8 @@ export class Recognition extends ModelBase {
       const lines = await this.decodeText(output)
       allLines.unshift(...lines)
     }
-    // console.timeEnd('Recognition')
-    const result = calculateBox({ lines: allLines, lineImages })
+    console.timeEnd('Recognition')
+    const result = calculateBox({ lines: allLines, lineImages, isFormatByLine })
     return result
   }
 
@@ -118,9 +118,11 @@ function decode(dictionary: string[], textIndex: number[], textProb: number[], i
 function calculateBox({
   lines,
   lineImages,
+  isFormatByLine = true
 }: {
   lines: Line[]
   lineImages: LineImage[]
+  isFormatByLine: boolean
 }) {
   let mainLine = lines
   const box = lineImages
@@ -133,7 +135,9 @@ function calculateBox({
     mainLine[i]['box'] = b
   }
   mainLine = mainLine.filter((x) => x.mean >= 0.5)
-  mainLine = afAfRec(mainLine)
+  if(isFormatByLine) {
+    mainLine = afAfRec(mainLine)
+  }
   return mainLine
 }
 
