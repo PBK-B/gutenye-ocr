@@ -1,4 +1,4 @@
-import type { ModelCreateOptions } from '#common/types'
+import type { ModelCreateOptions, OcrDetectOptions } from '#common/types'
 import { Detection, Recognition } from './models'
 
 export class Ocr {
@@ -22,9 +22,9 @@ export class Ocr {
     this.#recognition = recognition
   }
 
-  async detect(image: string, options = {}) {
-    const lineImages = await this.#detection.run(image, options)
-    const texts = await this.#recognition.run(lineImages, options)
+  async detect(image: string, options: OcrDetectOptions = {}) {
+    const lineImages = await this.#detection.run(image, options.detectionOptions ?? {})
+    const texts = await this.#recognition.run(lineImages,  options.recognitionOptions ?? {})
     return texts
   }
 }

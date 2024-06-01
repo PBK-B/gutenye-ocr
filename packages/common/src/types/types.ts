@@ -68,11 +68,23 @@ export interface ModelBaseOptions {
   debugOutputDir?: string
 }
 
-export interface ModelCreateOptions extends ModelBaseOptions {
+export interface OcrBaseOnnxOptions {
+    onnxOptions?: InferenceSession.SessionOptions
+}
+
+export interface ModelCreateOptions extends ModelBaseOptions, OcrBaseOnnxOptions {
   models?: {
     detectionPath: string
     recognitionPath: string
     dictionaryPath: string
   }
-  onnxOptions?: InferenceSession.SessionOptions
+}
+
+export type OcrRecognitionOptions = {
+    isFormatByLine?: boolean
+} & OcrBaseOnnxOptions
+
+export interface OcrDetectOptions {
+    detectionOptions?: OcrBaseOnnxOptions,
+    recognitionOptions?: OcrRecognitionOptions,
 }
