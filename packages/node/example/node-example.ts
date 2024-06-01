@@ -10,10 +10,13 @@ async function main() {
   })
   const imagePath = process.argv.slice(2)[0]
   console.time('ocr')
-  const result = await ocr.detect(imagePath)
+  const result = await ocr.detect(imagePath, {
+    recognitionOptions: {
+      isFormatByLine: false
+    }
+  })
   console.timeEnd('ocr')
-
-  console.log(result.map((v) => `${v.mean.toFixed(2)} ${v.text}`).join('\n'))
+  console.log(result.map((v) => `${v.mean.toFixed(2)} [${v.box}] ${v.text}`).join('\n'))
 }
 
 main()
