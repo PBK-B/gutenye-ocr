@@ -1,7 +1,9 @@
 declare module 'onnxruntime-node' {
-  export * from 'onnxruntime-common'
+    export * from 'onnxruntime-common'
 }
 
-declare module 'js-clipper' {
-    export default any;
-};
+declare module '@tzmax/ocr-models/node' {
+    export {}
+}
+
+declare module 'js-clipper' {}

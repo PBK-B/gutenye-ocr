@@ -1,5 +1,5 @@
 import cv from '@techstark/opencv-js'
-import clipper from 'js-clipper'
+import * as clipper from 'js-clipper'
 import { ImageRaw } from '#common/backend'
 import type { LineImage, ImageRaw as ImageRawType } from '#common/types'
 
@@ -119,8 +119,8 @@ function unclip(box: pointsType) {
     obj.Y = item[1]
     tmpArr.push(obj)
   })
-  const offset = new clipper.ClipperOffset()
-  offset.AddPath(tmpArr, clipper.JoinType.jtRound, clipper.EndType.etClosedPolygon)
+  const offset = new (clipper as any).ClipperOffset()
+  offset.AddPath(tmpArr, (clipper as any).JoinType.jtRound, (clipper as any).EndType.etClosedPolygon)
   const expanded: { X: number; Y: number }[][] = []
   offset.Execute(expanded, distance)
   let expandedArr: pointsType = []

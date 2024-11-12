@@ -4,7 +4,7 @@ import type {
   InferenceSession as InferenceSessionType,
   ModelCreateOptions as ModelCreateOptionsType,
   SplitIntoLineImages as SplitIntoLineImagesType,
-} from '#common/types'
+} from '../types'
 
 let FileUtils: FileUtilsType | any = undefined as unknown as FileUtilsType
 let ImageRaw: ImageRawType | any = undefined as unknown as ImageRawType
