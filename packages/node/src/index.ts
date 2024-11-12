@@ -11,7 +11,7 @@ registerBackend({
   ImageRaw,
   InferenceSession,
   splitIntoLineImages,
-  defaultModels,
+  defaultModels: defaultModels as any,
 })
 
 // biome-ignore lint/complexity/noStaticOnlyClass: <explanation>

@@ -57,7 +57,7 @@ export class ImageRaw extends ImageRawBase {
 async function toImageRaw(sharp: sharp.Sharp) {
   const result = await sharp.raw().toBuffer({ resolveWithObject: true })
   return {
-    data: result.data,
+    data: new Uint8Array(result.data),
     width: result.info.width,
     height: result.info.height,
   }
