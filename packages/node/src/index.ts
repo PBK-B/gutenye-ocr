@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises'
 import BaseOcr, { registerBackend, type ModelCreateOptions } from '@tzmax/ocr-common'
 import { splitIntoLineImages } from '@tzmax/ocr-common/splitIntoLineImages'
-import defaultModels from '@gutenye/ocr-models/node'
+import defaultModels from '@tzmax/ocr-models/node'
 import { InferenceSession } from 'onnxruntime-node'
 import { FileUtils } from './FileUtils'
 import { ImageRaw } from './ImageRaw'
