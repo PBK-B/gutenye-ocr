@@ -1,8 +1,8 @@
 {
-  "name": "@gutenye/ocr-models",
+  "name": "@tzmax/ocr-models",
   "description": "Guten OCR is a high accurate text detection (OCR) Javascript/Typescript library that runs on Node.js, Browser, React Native and C++. Based on PaddleOCR and ONNX runtime",
-  "version": "1.4.2",
-  "type": "module",
+  "version": "1.4.4",
+  "type": "commonjs",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -10,11 +10,17 @@
     "directory": "packages/models"
   },
   "exports": {
-    "./node": "./node.js"
+    "./node": "./index.js"
   },
-  "files": ["assets", "node.js", "!**/__tests__"],
+  "files": ["assets", "index.js", "!**/__tests__"],
   "scripts": {
     "prepublishOnly": "cp ../../README.md .",
     "postpublish": "rm README.md"
+  },
+  "devDependencies": {
+    "babel-plugin-transform-import-meta": "^2.2.1"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.26.0"
   }
 }

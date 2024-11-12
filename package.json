@@ -1,6 +1,6 @@
 {
-  "name": "@gutenye/ocr",
-  "version": "1.4.8",
+  "name": "@tzmax/ocr",
+  "version": "1.4.6",
   "workspaces": [
     "packages/browser",
     "packages/browser/example",
@@ -12,6 +12,12 @@
     "packages/react-native/example"
   ],
   "devDependencies": {
+    "@babel/cli": "^7.25.9",
+    "@babel/core": "^7.26.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.25.9",
+    "@babel/plugin-transform-runtime": "^7.25.9",
+    "@babel/preset-env": "^7.26.0",
+    "@babel/preset-typescript": "^7.26.0",
     "@biomejs/biome": "1.7.3",
     "@types/bun": "latest",
     "tsc-alias": "^1.8.8",
